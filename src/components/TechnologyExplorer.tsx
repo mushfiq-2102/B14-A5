@@ -15,7 +15,7 @@ function TechnologyExplorer() {
 
     async function loadTechnologies() {
       try {
-        const response = await fetch("/technologies.json");
+        const response = await fetch(`${import.meta.env.BASE_URL}technologies.json`);
         const data: Technology[] = await response.json();
         if (!cancelled) setTechnologies(data);
       } catch (error) {
