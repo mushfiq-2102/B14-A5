@@ -1,35 +1,39 @@
-import { useEffect, useState } from "react";
+import { use } from 'react';
+import { useState } from "react";
 import { toast } from "react-toastify";
 import TechnologyCard from "./TechnologyCard";
 import YourStack from "./YourStack";
 import type { Technology } from "../types/technology";
 
-function TechnologyExplorer() {
-  const [technologies, setTechnologies] = useState<Technology[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+function TechnologyExplorer({ technologiesPromise }: { technologiesPromise: Promise<Technology[]> }) {
+  //const [technologies, setTechnologies] = useState<Technology[]>([]);
+  //const [isLoading, setIsLoading] = useState(true);
+  const technologies = use(technologiesPromise);
   const [stack, setStack] = useState<Technology[]>([]);
 
   // Load the technology data from the JSON file once, on mount.
-  useEffect(() => {
-    let cancelled = false;
+//   useEffect(async () => {
+//     //let cancelled = false;
+// const response = await fetch(`/technologies.json`);
+//         const data: Technology[] = await response.json();
+//         setTechnologies(data);
+//     // async function loadTechnologies() {
+//     //   try {
+//     //    const response = await fetch(`/technologies.json`);
+//     //     const data: Technology[] = await response.json();
+//     //     if (!cancelled) setTechnologies(data);
+//     //   } catch (error) {
+//     //     if (!cancelled) toast.error("Could not load technology data.");
+//     //   } finally {
+//     //     if (!cancelled) setIsLoading(false);
+//     //   }
+//     // }
 
-    async function loadTechnologies() {
-      try {
-        const response = await fetch(`${import.meta.env.BASE_URL}technologies.json`);
-        const data: Technology[] = await response.json();
-        if (!cancelled) setTechnologies(data);
-      } catch (error) {
-        if (!cancelled) toast.error("Could not load technology data.");
-      } finally {
-        if (!cancelled) setIsLoading(false);
-      }
-    }
-
-    loadTechnologies();
-    return () => {
-      cancelled = true;
-    };
-  }, []);
+//     // loadTechnologies();
+//     // return () => {
+//     //   cancelled = true;
+//     // };
+//   }, []);
 
   const handleAdd = (technology: Technology) => {
     const alreadyAdded = stack.some((item) => item.id === technology.id);
