@@ -1,11 +1,5 @@
 @import "tailwindcss";
 
-/*
-  Single source of truth for the brand gradient.
-  Every gradient usage in the app (brand name, hero highlight,
-  primary buttons) reads from this one CSS variable, so re-theming
-  the whole site only means changing the value below.
-*/
 @theme {
   --brand-gradient: linear-gradient(90deg, #f97316, #ec4899, #7c3aed);
 }
