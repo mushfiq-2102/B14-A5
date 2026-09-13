@@ -1,39 +1,43 @@
-import { use } from 'react';
+import { use } from "react";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import TechnologyCard from "./TechnologyCard";
 import YourStack from "./YourStack";
 import type { Technology } from "../types/technology";
 
-function TechnologyExplorer({ technologiesPromise }: { technologiesPromise: Promise<Technology[]> }) {
+function TechnologyExplorer({
+  technologiesPromise,
+}: {
+  technologiesPromise: Promise<Technology[]>;
+}) {
   //const [technologies, setTechnologies] = useState<Technology[]>([]);
   //const [isLoading, setIsLoading] = useState(true);
   const technologies = use(technologiesPromise);
   const [stack, setStack] = useState<Technology[]>([]);
 
   // Load the technology data from the JSON file once, on mount.
-//   useEffect(async () => {
-//     //let cancelled = false;
-// const response = await fetch(`/technologies.json`);
-//         const data: Technology[] = await response.json();
-//         setTechnologies(data);
-//     // async function loadTechnologies() {
-//     //   try {
-//     //    const response = await fetch(`/technologies.json`);
-//     //     const data: Technology[] = await response.json();
-//     //     if (!cancelled) setTechnologies(data);
-//     //   } catch (error) {
-//     //     if (!cancelled) toast.error("Could not load technology data.");
-//     //   } finally {
-//     //     if (!cancelled) setIsLoading(false);
-//     //   }
-//     // }
+  //   useEffect(async () => {
+  //     //let cancelled = false;
+  // const response = await fetch(`/technologies.json`);
+  //         const data: Technology[] = await response.json();
+  //         setTechnologies(data);
+  //     // async function loadTechnologies() {
+  //     //   try {
+  //     //    const response = await fetch(`/technologies.json`);
+  //     //     const data: Technology[] = await response.json();
+  //     //     if (!cancelled) setTechnologies(data);
+  //     //   } catch (error) {
+  //     //     if (!cancelled) toast.error("Could not load technology data.");
+  //     //   } finally {
+  //     //     if (!cancelled) setIsLoading(false);
+  //     //   }
+  //     // }
 
-//     // loadTechnologies();
-//     // return () => {
-//     //   cancelled = true;
-//     // };
-//   }, []);
+  //     // loadTechnologies();
+  //     // return () => {
+  //     //   cancelled = true;
+  //     // };
+  //   }, []);
 
   const handleAdd = (technology: Technology) => {
     const alreadyAdded = stack.some((item) => item.id === technology.id);
@@ -58,7 +62,10 @@ function TechnologyExplorer({ technologiesPromise }: { technologiesPromise: Prom
   };
 
   return (
-    <section id="explore" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+    <section
+      id="explore"
+      className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8"
+    >
       <div className="mb-10 text-center md:text-left">
         <h2 className="text-3xl font-bold text-slate-900 sm:text-4xl">
           Explore the <span className="brand-gradient-text">Technologies</span>
@@ -70,11 +77,7 @@ function TechnologyExplorer({ technologiesPromise }: { technologiesPromise: Prom
 
       <div className="flex flex-col gap-8 lg:flex-row lg:items-start">
         <div className="flex-1">
-          {isLoading ? (
-            <div className="flex justify-center py-20 text-slate-400">
-              Loading technologies...
-            </div>
-          ) : (
+          
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {technologies.map((tech) => (
                 <TechnologyCard
@@ -85,10 +88,13 @@ function TechnologyExplorer({ technologiesPromise }: { technologiesPromise: Prom
                 />
               ))}
             </div>
-          )}
         </div>
 
-        <YourStack stack={stack} onRemove={handleRemove} onRemoveAll={handleRemoveAll} />
+        <YourStack
+          stack={stack}
+          onRemove={handleRemove}
+          onRemoveAll={handleRemoveAll}
+        />
       </div>
     </section>
   );
